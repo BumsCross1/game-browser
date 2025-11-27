@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Game Hub | Ultimate Gaming Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <canvas id="spaceBg"></canvas>
+
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen">
+        <div class="title-container floating">
+            <h1 class="main-title">SPACE HUB</h1>
+            <p class="subtitle">INTERGALACTIC GAMING EXPERIENCE</p>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="playerName" class="space-input" placeholder="ENTER YOUR CODENAME" maxlength="12"/>
+        </div>
+        
+        <button id="startBtn" class="space-btn">
+            INITIATE LAUNCH
+        </button>
+    </div>
+
+    <!-- Hub Screen -->
+    <div id="hubScreen" class="screen" style="display:none;">
+        <h2 class="welcome-text">WELCOME, <span id="displayName" class="player-name">COMMANDER</span></h2>
+        <p class="subtitle">SELECT YOUR MISSION</p>
+        
+        <div class="games-grid">
+            <div class="game-card" data-game="tictactoe">
+                <span class="game-icon">⭕</span>
+                <h3 class="game-title">QUANTUM TAC-TICS</h3>
+                <p class="game-desc">Strategic space warfare in a 3x3 grid. Outsmart the AI opponent.</p>
+            </div>
+            
+            <div class="game-card" data-game="chess">
+                <span class="game-icon">♛</span>
+                <h3 class="game-title">COSMIC CHESS</h3>
+                <p class="game-desc">Interstellar battle of wits. Command your fleet across the board.</p>
+            </div>
+            
+            <div class="game-card" data-game="snake">
+                <span class="game-icon">🐍</span>
+                <h3 class="game-title">NEBULA SERPENT</h3>
+                <p class="game-desc">Navigate through asteroid fields. Grow your cosmic serpent.</p>
+            </div>
+        </div>
+        
+        <div class="leaderboard-container">
+            <h3 class="leaderboard-title">GALACTIC LEADERBOARD</h3>
+            <ul id="scores"></ul>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen" style="display:none;">
+        <canvas id="gameCanvas"></canvas>
+        <button id="backHub" class="space-btn">RETURN TO HUB</button>
+    </div>
+
+    <script src="firebase.js"></script>
+    <script src="spaceBg.js"></script>
+    <script src="games/tictactoe.js"></script>
+    <script src="games/chess.js"></script>
+    <script src="games/snake.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
