@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
           Object.values(players)
               .sort((a,b) => (b.score || 0) - (a.score || 0))
-              .slice(0, 5) // Top 5 only
+              .slice(0, 5)
               .forEach((p, index) => {
                   const li = document.createElement('li');
                   li.innerHTML = `
@@ -55,9 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // Game selection with animation
+  // Game selection
   gameCards.forEach(card => {
-      card.onclick = () => {
+      card.addEventListener('click', function() {
+          const game = this.getAttribute('data-game');
+          
           // Add exit animation to hub
           hubScreen.style.opacity = '0';
           
@@ -71,13 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
                   gameScreen.style.opacity = '1';
               }, 50);
               
-              startSelectedGame(card.dataset.game);
+              startSelectedGame(game);
           }, 300);
-      };
+      });
   });
 
   // Back to hub
-  backHub.onclick = () => {
+  backHub.addEventListener('click', function() {
       gameScreen.style.opacity = '0';
       
       setTimeout(() => {
@@ -89,15 +91,23 @@ document.addEventListener('DOMContentLoaded', function() {
               hubScreen.style.opacity = '1';
           }, 50);
       }, 300);
-  };
+  });
 
   function startSelectedGame(game){
+      console.log("Starting game:", game); // Debug
+      
       if(game === 'tictactoe'){
-          TicTacToe.start(playerId, playerName);
-      } else if(game === 'chess'){
-          ChessGame.start(playerId, playerName);
+          if(typeof TicTacToe !== 'undefined') {
+              TicTacToe.start(playerId, playerName);
+          } else {
+              console.error('TicTacToe is not defined');
+          }
       } else if(game === 'snake'){
-          SnakeGame.start(playerId, playerName);
+          if(typeof SnakeGame !== 'undefined') {
+              SnakeGame.start(playerId, playerName);
+          } else {
+              console.error('SnakeGame is not defined');
+          }
       }
   }
 });

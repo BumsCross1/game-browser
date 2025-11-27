@@ -10,11 +10,13 @@ const firebaseConfig = {
     measurementId: "G-GSP1KJBWX2"
 };
 
-// Warten bis DOM geladen ist
-document.addEventListener('DOMContentLoaded', function() {
-    // Firebase nur initialisieren wenn nicht schon geschehen
+// Firebase initialisieren
+try {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
     window.db = firebase.database();
-});
+    console.log("Firebase initialized successfully");
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+}
